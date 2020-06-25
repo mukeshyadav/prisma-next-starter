@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import Link from 'next/link';
+import { List, ListItem, Image, Stack, Heading } from '@chakra-ui/core';
 
 export async function getStaticProps() {
   const prisma = new PrismaClient();
@@ -14,13 +15,13 @@ export async function getStaticProps() {
 }
 
 export default ({ songs }) => (
-  <ul>
+  <List>
     {songs.map((song) => (
-      <li key={song.id}>
-        <Link href="/songs/[id]" as={`songs/${song.id}`}>
+      <ListItem m={8} key={song.id} border="1px solid" borderColor="gray.200">
+        <Link href="/songs/[id]" as={`songs/${song.id}`} passHref>
           {song.name}
         </Link>
-      </li>
+      </ListItem>
     ))}
-  </ul>
+  </List>
 );
